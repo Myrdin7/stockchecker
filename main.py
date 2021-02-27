@@ -3,6 +3,9 @@ import requests
 import time
 from pushover import init, Client
 import random
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 from config import Config
 
@@ -30,11 +33,13 @@ shops = {'coolblue':{'urls':['https://www.coolblue.nl/product/865866/playstation
         }
 }
 
-
 users = {'Myrdin':'u2peec5j2cihqg6jp2ozez5v78nr8p',
          'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
 }
 
+send_to_email = ["myrdinvdhorst@gmail.com", 
+                "m.vanderhorst@districon.com", 
+                "sven.blijleven@gmail.com"]
 
 referers = [
     'http://www.bing.com/',
@@ -160,12 +165,37 @@ def bol():
 
 
 def send_notification(shop, url):
-    for user in users:
-        print("Message to: "+user, flush=True)
-        client = Client(users[user],
-                        api_token=Config.PUSHOVERTOKEN)
-        client.send_message('PS5 beschikbaar bij {}. Click link:'.format(shop), 
-                            title="PS5 in Stock!", url=url)
+    try:
+        for user in users:
+            print("Message to: "+user, flush=True)
+            client = Client(users[user],
+                            api_token=Config.PUSHOVERTOKEN)
+            client.send_message('PS5 beschikbaar bij {}. Click link:'.format(shop), 
+                                title="PS5 in Stock!", url=url)
+    except:
+        print("Error trying to send push notification")
+
+    try:
+        email = "myrdinautomail@gmail.com"
+        password = Config.EMAILPW
+        subject = "PS5 op voorraad bij {}".format(shop)
+        message = "Link {}".format(url)
+
+        msg = MIMEMultipart()
+        msg["From"] = email
+        msg["To"] = ", ".join(send_to_email)
+        msg["Subject"] = subject
+
+        msg.attach(MIMEText(message, 'plain'))
+
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(email, password)
+        text = msg.as_string()
+        server.sendmail(email, send_to_email, text)
+        server.quit()
+    except:
+        print("Failed to send email")
 
 
 
