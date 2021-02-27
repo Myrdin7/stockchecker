@@ -17,7 +17,7 @@ shops = {'coolblue':{'urls':['https://www.coolblue.nl/product/865866/playstation
                             }}
 
 users = {'Myrdin':'u2peec5j2cihqg6jp2ozez5v78nr8p',
-        # 'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
+         'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
 }
 
 def get_random_ua():
@@ -39,7 +39,7 @@ def main_loop():
 
 def coolblue():
     try:
-        req = requests.get(shops['coolblue']['urls'][1], headers={'User-Agent':get_random_ua()})
+        req = requests.get(shops['coolblue']['urls'][0], headers={'User-Agent':get_random_ua()})
         print("Coolblue - {} - {}".format(req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("button", {"class": "js-add-to-cart-button"})
