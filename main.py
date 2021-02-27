@@ -62,7 +62,7 @@ def coolblue():
 def amazonde():
     try:
         req = requests.get(shops['amazonde']['urls'][0], headers={'User-Agent':get_random_ua()})
-        print("Coolblue - {} - {}".format(req.status_code, req.reason))
+        print("Amazon NL - {} - {}".format(req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("input", {"id": "add-to-cart-button"})
         if in_cart == None:
@@ -77,7 +77,7 @@ def amazonde():
 def amazonnl():
     try:
         req = requests.get(shops['amazonnl']['urls'][0], headers={'User-Agent':get_random_ua()})
-        print("Coolblue - {} - {}".format(req.status_code, req.reason))
+        print("Amazon NL - {} - {}".format(req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("input", {"id": "add-to-cart-button"})
         if in_cart == None:
