@@ -36,7 +36,7 @@ def main_loop():
 
 def coolblue():
     try:
-        req = requests.get(shops['coolblue']['urls'][1], headers={'User-Agent':get_random_ua()})
+        req = requests.get(shops['coolblue']['urls'][0], headers={'User-Agent':get_random_ua()})
         print("Coolblue - {} - {}".format(req.status_code, req.reason), flush=True)
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("button", {"class": "js-add-to-cart-button"})
