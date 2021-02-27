@@ -12,13 +12,15 @@ with open('user_agents.txt') as f:
 
 shops = {'coolblue':{'urls':['https://www.coolblue.nl/product/865866/playstation-5.html', 
                             'https://www.coolblue.nl/product/869587/sony-playstation-5-dualsense-draadloze-controller.html']
-                            },
+        },
         'amazonde':{'urls':['https://www.amazon.de/PS5-Konsole-Sony-PlayStation-Standard/dp/B08VLX84G6/',
-                            'https://www.amazon.de/Sony-DualSense-Wireless-Controller-PlayStation-5/dp/B08H93ZRK9/'],
+                            'https://www.amazon.de/Sony-DualSense-Wireless-Controller-PlayStation-5/dp/B08H93ZRK9/']
+        },
         'amazonnl':{'urls':['https://www.amazon.nl/Sony-PlayStation-PlayStation®5-Console/dp/B08H93ZRK9',
                             'https://www.amazon.nl/Sony-PlayStation-9399506-PlayStation®5-Controller/dp/B08H97WTBL/'],
         }
 }
+
 
 users = {'Myrdin':'u2peec5j2cihqg6jp2ozez5v78nr8p',
          'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
