@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 from pushover import init, Client
-import numpy as np
+import random
 
 from config import Config
 
@@ -17,16 +17,14 @@ shops = {'coolblue':{'urls':['https://www.coolblue.nl/product/865866/playstation
                             }}
 
 users = {'Myrdin':'u2peec5j2cihqg6jp2ozez5v78nr8p',
-        'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
+        # 'Sven':'us51jg8q6kw25hmugxgx8zp8r76nci'
 }
 
 def get_random_ua():
     random_ua = ''
     try:
-        prng = np.random.RandomState()
-        index = prng.permutation(len(user_agents) - 1)
-        idx = np.asarray(index, dtype=np.integer)[0]
-        random_proxy = user_agents[int(idx)]
+        idx = random.randrange(0, len(user_agents)-1, 1)
+        random_ua = user_agents[int(idx)]
     except Exception as ex:
         print('Exception in random_ua')
         print(str(ex))
@@ -41,7 +39,6 @@ def main_loop():
 
 def coolblue():
     try:
-        print(get_random_ua())
         req = requests.get(shops['coolblue']['urls'][1], headers={'User-Agent':get_random_ua()})
         print("Coolblue - {} - {}".format(req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
@@ -50,18 +47,14 @@ def coolblue():
             print("Out of stock")
         elif in_cart != None:
             print("In stock!!")
-            # send_notification('Coolblue', shops['coolblue']['urls'][0])
+            send_notification('Coolblue', shops['coolblue']['urls'][0])
     except:
         print("Error for Coolblue, message: {} - {}".format(req.status_code, req.reason))
 
 
-
-
-
-
 def send_notification(shop, url):
     for user in users:
-        print(user)
+        print("Message to: "+user)
         client = Client(users[user],
                         api_token=Config.PUSHOVERTOKEN)
         client.send_message('PS5 beschikbaar bij {}. Click link:'.format(shop), 
