@@ -83,8 +83,9 @@ def coolblue():
         elif in_cart != None:
             print("In stock!!", flush=True)
             send_notification('Coolblue', shops['coolblue']['urls'][prod])
-    except:
-        print("Error for Coolblue, message: {} - {}".format(req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in coolblue', flush=True)
+        print(str(ex))
 
 
 def amazonde():
@@ -98,8 +99,9 @@ def amazonde():
         elif in_cart != None:
             print("In stock!!")
             send_notification('Amazon DE', shops['amazonde']['urls'][prod])
-    except:
-        print("Error for Amazon DE, message: {} - {}".format(req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in Amazon DE', flush=True)
+        print(str(ex))
 
 
 def amazonnl():
@@ -113,8 +115,9 @@ def amazonnl():
         elif in_cart != None:
             print("In stock!!")
             send_notification('Amazon NL', shops['amazonnl']['urls'][prod])
-    except:
-        print("Error for Amazon NL, message: {} - {}".format(req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in Amazon NL', flush=True)
+        print(str(ex))
 
 def mediamarkt():
     try:
@@ -129,8 +132,9 @@ def mediamarkt():
         elif not "uitverkocht" in in_cart_text and soup.find("a", {"id": "pdp-add-to-cart"}) != None:
             print("In stock!!")
             send_notification(store[1], shops[store[0]]['urls'][prod])
-    except:
-        print("Error for {}, message: {} - {}".format(store[1], req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in Media Markt', flush=True)
+        print(str(ex))
 
 def nedgame():
     try:
@@ -144,8 +148,9 @@ def nedgame():
         elif in_cart != None:
             print("In stock!!")
             send_notification(store[1], shops[store[0]]['urls'][prod])
-    except:
-        print("Error for {}, message: {} - {}".format(store[1], req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in Nedgam', flush=True)
+        print(str(ex))
 
 def bol():
     try:
@@ -160,8 +165,9 @@ def bol():
             send_notification(store[1], shops[store[0]]['urls'][prod])
         else:
             print("Out of stock")
-    except:
-        print("Error for {}, message: {} - {}".format(store[1], req.status_code, req.reason))
+    except Exception as ex:
+        print('Exception in Bol', flush=True)
+        print(str(ex))
 
 
 def send_notification(shop, url):
@@ -201,3 +207,4 @@ def send_notification(shop, url):
 
 if __name__ == '__main__':
     main_loop()
+
