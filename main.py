@@ -32,7 +32,7 @@ shops = {'coolblue': {'urls': ['https://www.coolblue.nl/product/865866/playstati
                           'https://www.bol.com/nl/p/sony-ps5-dualsense-draadloze-controller/9300000007897748/']
                  },
         'gamemania' : {'urls': ['https://www.gamemania.nl/Consoles/playstation-5/144093_playstation-5-disc-edition',
-                                '']
+                                'https://www.gamemania.nl/Accessories/controllers/145722_playstation-5-dualsense-draadloze-controller']
                     }
          }
 
@@ -75,6 +75,7 @@ def main_loop():
         nedgame()
         mediamarkt()
         bol()
+        gamemania()
         time.sleep(random.randrange(20, 60, 1))
 
 
