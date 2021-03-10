@@ -31,9 +31,9 @@ shops = {'coolblue': {'urls': ['https://www.coolblue.nl/product/865866/playstati
          'bol': {'urls': ['https://www.bol.com/nl/p/sony-playstation-5-console/9300000004162282/',
                           'https://www.bol.com/nl/p/sony-ps5-dualsense-draadloze-controller/9300000007897748/']
                  },
-        'gamemania' : {'urls': ['https://www.gamemania.nl/Consoles/playstation-5/144093_playstation-5-disc-edition',
+         'gamemania': {'urls': ['https://www.gamemania.nl/Consoles/playstation-5/144093_playstation-5-disc-edition',
                                 'https://www.gamemania.nl/Accessories/controllers/145722_playstation-5-dualsense-draadloze-controller']
-                    }
+                       }
          }
 
 users = {'Myrdin': 'u2peec5j2cihqg6jp2ozez5v78nr8p',
@@ -186,15 +186,15 @@ def bol():
         print(str(ex))
 
 
-
 def gamemania():
     try:
         store = ['gamemania', 'Gamemania']
-        req = requests.get(shops[store[0]]['urls'][prod], headers={'User-Agent':get_random_ua()})
+        req = requests.get(shops[store[0]]['urls'][prod], headers={
+                           'User-Agent': get_random_ua(), 'referer': random.choice(referers)})
         print("{} - {} - {}".format(store[1], req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("label", {"class": "order--new"})
-        in_cart_text = in_cart.text.replace(" ","").lower()
+        in_cart_text = in_cart.text.replace(" ", "").lower()
         if not "nietbeschikbaar" in in_cart_text and 'nieuw' in in_cart_text:
             print("In stock!!")
             send_notification(store[1], shops[store[0]]['urls'][prod])
@@ -203,7 +203,6 @@ def gamemania():
     except Exception as ex:
         print('Exception in Gamemania', flush=True)
         print(str(ex))
-
 
 
 def send_notification(shop, url):
@@ -242,4 +241,3 @@ def send_notification(shop, url):
 
 if __name__ == '__main__':
     main_loop()
-
