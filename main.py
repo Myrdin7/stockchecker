@@ -138,10 +138,14 @@ def mediamarkt():
         print("{} - {} - {}".format(store[1], req.status_code, req.reason))
         soup = BeautifulSoup(req.text, 'lxml')
         in_cart = soup.find("div", {"class": "box infobox availability"})
-        in_cart_text = in_cart.text.replace(" ", "").lower()
-        if "uitverkocht" in in_cart_text:
+        try:
+            in_cart_text = in_cart.text.replace(" ", "").lower()
+        except:
+            in_cart_text = ''
+        print(in_cart_text)
+        if "uitverkocht" in in_cart_text or in_cart_text == '':
             print("Out of stock")
-        elif not "uitverkocht" in in_cart_text and soup.find("a", {"id": "pdp-add-to-cart"}) != None:
+        elif soup.find("a", {"id": "pdp-add-to-cart"}) != None:
             print("In stock!!")
             send_notification(store[1], shops[store[0]]['urls'][prod])
     except Exception as ex:
