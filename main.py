@@ -25,6 +25,9 @@ shops = {'coolblue': {'urls': ['https://www.coolblue.nl/product/865866/playstati
          'nedgame': {'urls': ['https://www.nedgame.nl/playstation-5/playstation-5-disc-version-bundel/9820628451/',
                               'https://www.nedgame.nl/playstation-5/sony-dualsense-wireless-controller/6022334263/'],
                      },
+         'nedgame2': {'urls': ['https://www.nedgame.nl/playstation-5/playstation-5-digital-edition-bundel/6481373393',
+                               'https://www.nedgame.nl/playstation-5/sony-dualsense-wireless-controller/6022334263/'],
+                      },
          'mediamarkt': {'urls': ['https://www.mediamarkt.nl/nl/product/_sony-playstation-5-disk-edition-1664768.html',
                                  'https://www.mediamarkt.nl/nl/product/_sony-playstation-5-dualsense-wit-1664770.html'],
                         },
@@ -73,6 +76,7 @@ def main_loop():
         amazonde()
         amazonnl()
         nedgame()
+        nedgame2()
         mediamarkt()
         bol()
         gamemania()
@@ -156,6 +160,24 @@ def mediamarkt():
 def nedgame():
     try:
         store = ['nedgame', 'NedGame']
+        req = requests.get(shops[store[0]]['urls'][prod], headers={
+                           'User-Agent': get_random_ua(), 'referer': random.choice(referers)})
+        print("{} - {} - {}".format(store[1], req.status_code, req.reason))
+        soup = BeautifulSoup(req.text, 'lxml')
+        in_cart = soup.find("div", {"class": "button koopbutton"})
+        if in_cart == None:
+            print("Out of stock")
+        elif in_cart != None:
+            print("In stock!!")
+            send_notification(store[1], shops[store[0]]['urls'][prod])
+    except Exception as ex:
+        print('Exception in Nedgam', flush=True)
+        print(str(ex))
+
+
+def nedgame2():
+    try:
+        store = ['nedgame2', 'NedGame']
         req = requests.get(shops[store[0]]['urls'][prod], headers={
                            'User-Agent': get_random_ua(), 'referer': random.choice(referers)})
         print("{} - {} - {}".format(store[1], req.status_code, req.reason))
