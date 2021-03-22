@@ -37,11 +37,11 @@ shops = {'coolblue': {'urls': ['https://www.coolblue.nl/product/865866/playstati
          }
 
 users = {'Myrdin': 'u2peec5j2cihqg6jp2ozez5v78nr8p',
-         'Sven': 'us51jg8q6kw25hmugxgx8zp8r76nci'
+         'Sven': 'us51jg8q6kw25hmugxgx8zp8r76nci',
+         'Davy': 'uznan927os8jwo22bbwidroo5xa9xw'
          }
 
 send_to_email = ["myrdinvdhorst@gmail.com",
-                 "m.vanderhorst@districon.com",
                  "sven.blijleven@gmail.com"]
 
 referers = [

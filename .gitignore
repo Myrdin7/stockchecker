@@ -2,3 +2,5 @@ config.py
 scrapers.py
 .vscode
 __pycache__
+.vscode/
+__pycache__/
