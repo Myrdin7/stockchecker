@@ -39,13 +39,17 @@ shops = {'coolblue': {'urls': ['https://www.coolblue.nl/product/865866/playstati
                        }
          }
 
-users = {'Myrdin': 'u2peec5j2cihqg6jp2ozez5v78nr8p',
-         'Sven': 'us51jg8q6kw25hmugxgx8zp8r76nci',
-         'Davy': 'uznan927os8jwo22bbwidroo5xa9xw'
-         }
+users = {
+    # 'Myrdin': 'u2peec5j2cihqg6jp2ozez5v78nr8p',
+    #  'Sven': 'us51jg8q6kw25hmugxgx8zp8r76nci',
+    #  'Davy': 'uznan927os8jwo22bbwidroo5xa9xw',
+    'Sjors': 'ugsgjkwm4gj7h7ay8pgtgpiqusjzo8'
 
-send_to_email = ["myrdinvdhorst@gmail.com",
-                 "sven.blijleven@gmail.com"]
+}
+
+send_to_email = ["m.vanderhorst@districon.com",
+                 "Sjorsvanroos@hotmail.com"
+                 ]
 
 referers = [
     'http://www.bing.com/',
@@ -74,7 +78,7 @@ def main_loop():
     while True:
         coolblue()
         amazonde()
-        amazonnl()
+        # amazonnl()
         nedgame()
         nedgame2()
         mediamarkt()
